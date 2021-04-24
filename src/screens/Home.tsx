@@ -11,7 +11,7 @@ const Home = ({ search }: Props): React.ReactElement => {
   const { data: products } = useApi<Array<Product>>('product');
   if (!products) return <div>Loading...</div>;
   return (
-    <div className="pt-4 grid grid-cols-4 gap-x-8 gap-y-12">
+    <div className="px-4 pt-4 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
       {products
         .filter(
           (each) =>

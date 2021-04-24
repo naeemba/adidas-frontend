@@ -9,10 +9,14 @@ const Product = (): React.ReactElement => {
   const { data: product } = useApi<ProductType>(`product/${productId}`);
   if (!product) return <div>Loading...</div>;
   return (
-    <div>
-      <div className="flex p-8 border-t shadow-lg rounded-xl">
-        <img src={product.imgUrl} alt={product.name} className="rounded-xl" />
-        <div className="flex-1 my-8 ml-8">
+    <div className="w-full md:px-4">
+      <div className="flex flex-col p-4 pt-0 md:flex-row md:p-8 md:border-t md:shadow-lg md:rounded-xl">
+        <img
+          src={product.imgUrl}
+          alt={product.name}
+          className="md:rounded-xl"
+        />
+        <div className="flex-1 my-8 md:ml-8">
           <div className="flex text-4xl font-bold text-gray-700 uppercase">
             {product.name}
             <div className="inline-block ml-auto text-4xl">
@@ -29,13 +33,13 @@ const Product = (): React.ReactElement => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between mt-8 mb-4">
+      <div className="flex justify-between mx-4 mt-8 mb-4 md:mx-0">
         <h1 className="text-3xl text-gray-700">Reviews</h1>
         <Button onClick={(): void => {}} className="my-auto">
           Add Review
         </Button>
       </div>
-      <div className="pb-8 grid grid-cols-2 gap-8">
+      <div className="px-4 md:px-0 lg:pb-8 grid gap-8 lg:grid-cols-2">
         {product.reviews.map((review, idx) => (
           <div
             // eslint-disable-next-line react/no-array-index-key

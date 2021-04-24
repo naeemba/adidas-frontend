@@ -7,18 +7,18 @@ const Header = (): React.ReactElement => {
   const params = new URLSearchParams(window.location.search);
   const searchValue = params.get('search');
   return (
-    <div className="flex h-24 my-4 bg-blue-100 rounded-2xl">
+    <div className="flex items-center px-4 py-4 my-0 bg-blue-100 md:my-4 md:mx-4 md:rounded-2xl">
       <button
         type="button"
         onClick={(): void => locationUtils.pushState('/')}
-        className="my-auto focus:outline-none"
+        className="my-auto mr-4 focus:outline-none"
       >
-        <img src={logo} alt="logo" className="w-16 ml-8" />
+        <img src={logo} alt="logo" className="h-10 lg:w-16" />
       </button>
-      <div className="relative flex items-center my-auto ml-auto mr-8">
+      <div className="relative flex items-center flex-1 max-w-xs my-auto ml-4 ml-auto">
         <input
           type="text"
-          className="h-12 text-sm text-gray-500 rounded-lg pl-14 focus:outline-none"
+          className="w-full h-12 text-sm text-gray-500 rounded-lg pl-14 focus:outline-none"
           placeholder="search"
           defaultValue={searchValue ?? ''}
           onChange={(event): void =>
