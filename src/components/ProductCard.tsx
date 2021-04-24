@@ -1,6 +1,7 @@
 import React from 'react';
 import { Product as ProductType } from '../types';
 import { locationUtils } from '../utils';
+import Button from './Button';
 
 type Props = {
   product: ProductType;
@@ -29,13 +30,12 @@ const Product = ({ product }: Props): React.ReactElement => {
         <div className="mb-4 text-base font-light leading-relaxed text-gray-700">
           {product.description}
         </div>
-        <button
-          type="button"
-          className="flex items-center justify-center w-full py-2 mt-4 text-sm leading-normal text-white uppercase bg-blue-300 rounded-lg shadow-md outline-none hover:shadow-xl hover:bg-blue-400 transition-all duration-200 focus:outline-none focus:shadow-none"
+        <Button
           onClick={(): void => locationUtils.pushState(`product/${product.id}`)}
+          className="w-full mt-4"
         >
-          <span className="pt-px mt-px">Details</span>
-        </button>
+          Details
+        </Button>
       </div>
     </div>
   );

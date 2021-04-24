@@ -27,6 +27,7 @@ const Wrapper = (): React.ReactElement => {
     setParams(new URLSearchParams(window.location.search));
   };
   useEffect(() => {
+    changeUrlListener();
     window.addEventListener('popstate', changeUrlListener);
     return (): void =>
       window.removeEventListener('popstate', changeUrlListener);
