@@ -19,7 +19,6 @@ const Wrapper = (): React.ReactElement => {
     return (): void =>
       window.removeEventListener('popstate', changeUrlListener);
   }, []);
-  console.log({ pathname });
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-6xl">
