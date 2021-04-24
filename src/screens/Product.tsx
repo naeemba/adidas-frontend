@@ -61,7 +61,7 @@ const Product = (): React.ReactElement => {
                   ),
                 )}
             </div>
-            {review.text}
+            <span className="capitalize">{review.text}</span>
           </div>
         ))}
       </div>
