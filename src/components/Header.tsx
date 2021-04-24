@@ -4,6 +4,8 @@ import logo from '../assets/logo.svg';
 import searchIcon from '../assets/search-icon.svg';
 
 const Header = (): React.ReactElement => {
+  const params = new URLSearchParams(window.location.search);
+  const searchValue = params.get('search');
   return (
     <div className="flex h-24 my-4 bg-blue-100 rounded-2xl">
       <button
@@ -18,6 +20,12 @@ const Header = (): React.ReactElement => {
           type="text"
           className="h-12 text-sm text-gray-500 rounded-lg pl-14 focus:outline-none"
           placeholder="search"
+          defaultValue={searchValue ?? ''}
+          onChange={(event): void =>
+            locationUtils.pushState(
+              `${window.location.pathname}?search=${event.target.value}`,
+            )
+          }
         />
         <img
           src={searchIcon}
