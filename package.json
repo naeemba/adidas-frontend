@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "run-p watch:tailwind start:react",
+    "start": "run-p start:tailwind start:react",
     "start:react": "react-scripts start",
-    "watch:tailwind": "postcss -w src/styles/index.css -o src/build.css",
+    "start:tailwind": "postcss -w src/styles/index.css -o src/styles/build.css --config postcss.config.js",
     "test": "react-scripts test",
     "lint": "eslint --ext .ts,.tsx src --color --quiet",
     "eject": "react-scripts eject",
     "build": "react-scripts build",
-    "build:tailwind": "postcss src/styles/index.css -o src/styles/build.css",
+    "build:tailwind": "postcss src/styles/index.css -o src/styles/build.css --config postcss.config.js --env production",
     "prebuild": "npm run build:tailwind"
   },
   "dependencies": {
