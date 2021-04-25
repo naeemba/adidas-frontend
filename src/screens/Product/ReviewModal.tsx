@@ -21,6 +21,11 @@ const ReviewModal = ({ active, onClose }: Props): React.ReactElement => {
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
 
+  const reset = (): void => {
+    setReview('');
+    setRating(0);
+  };
+
   const addReview = (): void => {
     if (error.review || error.rating) return;
     const newReview: Review = {
@@ -28,7 +33,10 @@ const ReviewModal = ({ active, onClose }: Props): React.ReactElement => {
       rating,
       productId,
     };
-    saveReview({ body: JSON.stringify(newReview) }).then(onClose);
+    saveReview({ body: JSON.stringify(newReview) }).then(() => {
+      reset();
+      onClose();
+    });
   };
   return (
     <Modal onClose={onClose} active={active}>

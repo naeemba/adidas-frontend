@@ -10,12 +10,14 @@ type Props = {
 const Product = ({ product }: Props): React.ReactElement => {
   return (
     <div className="flex flex-col p-4 border-t shadow hover:shadow-xl rounded-xl transition-all duration-200">
-      <img
-        src={product.imgUrl}
-        alt={product.name}
-        className="-mt-8 rounded-lg shadow-lg"
-      />
-      <div className="pt-5">
+      <div className="flex flex-1 -mt-8 overflow-hidden bg-gray-100 rounded-lg">
+        <img
+          src={product.imgUrl}
+          alt={product.name}
+          className="my-auto shadow-lg"
+        />
+      </div>
+      <div className="pt-5 mt-auto">
         <h1 className="flex mb-2 text-xl font-bold leading-normal text-gray-900 uppercase">
           {product.name}
           <div className="inline-block ml-auto text-2xl">

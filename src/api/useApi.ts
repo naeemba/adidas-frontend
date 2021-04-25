@@ -9,10 +9,12 @@ type Options = {
 const useApi = <T>(
   url: string,
   options?: Options,
-): { data: T | undefined; reload: () => void } => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): { data: T | undefined; reload: () => void; error: any } => {
   const { isReview, method } = options ?? {};
   const [data, setData] = useState();
   const [key, setKey] = useState(0);
+  const [error, setError] = useState();
   const reload = (): void => {
     setKey((k) => k + 1);
   };
@@ -26,11 +28,14 @@ const useApi = <T>(
     }).then(
       (res) => {
         setData(res.data);
+        setError(undefined);
       },
-      () => {},
+      (e) => {
+        setError(e);
+      },
     );
   }, [isReview, url, method, key]);
-  return { data, reload };
+  return { data, reload, error };
 };
 
 export default useApi;

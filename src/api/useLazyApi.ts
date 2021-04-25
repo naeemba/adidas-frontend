@@ -15,7 +15,6 @@ const useLazyApi = <T>(
     (opt?: { body?: string }): Promise<T> => {
       const { body } = opt ?? {};
       return new Promise<T>((resolve, reject) => {
-        console.log('hi');
         axios({
           method: method ?? 'get',
           baseURL: isReview
@@ -26,11 +25,9 @@ const useLazyApi = <T>(
           headers: { 'Content-Type': 'application/json' },
         }).then(
           (res) => {
-            console.log('hi', res);
             return resolve(res.data);
           },
           (e) => {
-            console.log('hi', e);
             return reject(e.status);
           },
         );
