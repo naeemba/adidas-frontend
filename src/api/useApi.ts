@@ -6,9 +6,16 @@ type Options = {
   method?: 'get' | 'post' | 'put' | 'delete';
 };
 
-const useApi = <T>(url: string, options?: Options): { data: T | undefined } => {
+const useApi = <T>(
+  url: string,
+  options?: Options,
+): { data: T | undefined; reload: () => void } => {
   const { isReview, method } = options ?? {};
   const [data, setData] = useState();
+  const [key, setKey] = useState(0);
+  const reload = (): void => {
+    setKey((k) => k + 1);
+  };
   useEffect(() => {
     axios({
       method: method ?? 'get',
@@ -22,8 +29,8 @@ const useApi = <T>(url: string, options?: Options): { data: T | undefined } => {
       },
       () => {},
     );
-  }, [isReview, url, method]);
-  return { data };
+  }, [isReview, url, method, key]);
+  return { data, reload };
 };
 
 export default useApi;

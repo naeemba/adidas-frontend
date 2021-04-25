@@ -1,12 +1,22 @@
-import React from 'react';
-import useApi from '../api';
-import { Product as ProductType } from '../types';
-import { ReactComponent as StarIcon } from '../assets/star-icon.svg';
-import Button from '../components/Button';
+import React, { useState } from 'react';
+import useApi from '../../api';
+import { Product as ProductType, Review } from '../../types';
+import { ReactComponent as StarIcon } from '../../assets/star-icon.svg';
+import Button from '../../components/Button';
+import ReviewModal from './ReviewModal';
 
 const Product = (): React.ReactElement => {
+  const [isActive, setActive] = useState(false);
   const productId = window.location.pathname.split('/').reverse()[0];
-  const { data: product } = useApi<ProductType>(`product/${productId}`);
+  const { data: product, reload: productReload } = useApi<ProductType>(
+    `product/${productId}`,
+  );
+  const { data: reviews, reload: reviewsReload } = useApi<Array<Review>>(
+    `reviews/${productId}`,
+    {
+      isReview: true,
+    },
+  );
   if (!product) return <div>Loading...</div>;
   return (
     <div className="w-full md:px-4">
@@ -35,12 +45,12 @@ const Product = (): React.ReactElement => {
       </div>
       <div className="flex justify-between mx-4 mt-8 mb-4 md:mx-0">
         <h1 className="text-3xl text-gray-700">Reviews</h1>
-        <Button onClick={(): void => {}} className="my-auto">
+        <Button onClick={(): void => setActive(true)} className="my-auto">
           Add Review
         </Button>
       </div>
       <div className="px-4 md:px-0 lg:pb-8 grid gap-8 lg:grid-cols-2">
-        {product.reviews.map((review, idx) => (
+        {[...product.reviews, ...(reviews ?? [])].map((review, idx) => (
           <div
             // eslint-disable-next-line react/no-array-index-key
             key={`${review.text}${idx}`}
@@ -69,6 +79,14 @@ const Product = (): React.ReactElement => {
           </div>
         ))}
       </div>
+      <ReviewModal
+        active={isActive}
+        onClose={(): void => {
+          setActive(false);
+          productReload();
+          reviewsReload();
+        }}
+      />
     </div>
   );
 };
