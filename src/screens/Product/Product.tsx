@@ -4,11 +4,12 @@ import { Product as ProductType, Review } from '../../types';
 import { ReactComponent as StarIcon } from '../../assets/star-icon.svg';
 import Button from '../../components/Button';
 import ReviewModal from './ReviewModal';
+import Alert from '../../components/Alert';
 
 const Product = (): React.ReactElement => {
   const [isActive, setActive] = useState(false);
   const productId = window.location.pathname.split('/').reverse()[0];
-  const { data: product, reload: productReload } = useApi<ProductType>(
+  const { data: product, reload: productReload, error } = useApi<ProductType>(
     `product/${productId}`,
   );
   const { data: reviews, reload: reviewsReload } = useApi<Array<Review>>(
@@ -17,7 +18,14 @@ const Product = (): React.ReactElement => {
       isReview: true,
     },
   );
-  if (!product) return <div>Loading...</div>;
+  if (error)
+    return (
+      <Alert
+        type="error"
+        message=" Unfortunately something bad happened. Please try again later!"
+      />
+    );
+  if (!product) return <Alert type="info" message="Loading..." />;
   return (
     <div className="w-full md:px-4">
       <div className="flex flex-col p-4 pt-0 md:flex-row md:p-8 md:border-t md:shadow-lg md:rounded-xl">
