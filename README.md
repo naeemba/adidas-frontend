@@ -43,6 +43,12 @@ This project consists of two pages and a custom router, it is developed to work 
 Here are some screenshots:
 
 ![Home - full](screenshots/home-full.png)
-![Product - full](screenshots/product.png)
+![Product - full](screenshots/product-full.png)
 ![Add Product](screenshots/add-product.png)
 ![Add Review](screenshots/add-review.png)
+![Home Small](screenshots/home-small.png)
+![Home Mobile](screenshots/home-mobile.png)
+![Home Medium](screenshots/home-medium.png)
+![Home Laptop](screenshots/home-laptop.png)
+![Product Small](screenshots/product-small.png)
+![Product Medium](screenshots/product-medium.png)
