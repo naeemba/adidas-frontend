@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLazyApi } from '../../api';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
-import { Product, Review } from '../../types';
+import { Product } from '../../types';
 
 type Props = {
   active: boolean;
@@ -27,7 +27,7 @@ const ProductModal = ({ active, onClose }: Props): React.ReactElement => {
     imgUrl?: boolean;
     price?: boolean;
   }>({});
-  const { call: saveProduct } = useLazyApi<Review>('product', {
+  const { call: saveProduct } = useLazyApi('product', {
     method: 'post',
   });
   const [description, setDescription] = useState('');
@@ -61,7 +61,7 @@ const ProductModal = ({ active, onClose }: Props): React.ReactElement => {
   };
   return (
     <Modal onClose={onClose} active={active}>
-      <div className="text-xl">Add Review</div>
+      <div className="text-xl">Add Product</div>
       <form className="flex flex-col sm:w-96">
         <input
           value={name}
